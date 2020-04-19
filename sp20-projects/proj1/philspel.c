@@ -8,6 +8,8 @@
  */
 #include "philspel.h"
 
+#include "str.h"
+
 /*
  * Standard IO and file routines.
  */
@@ -28,6 +30,9 @@
  */
 #include <string.h>
 
+size_t readLineToString(String *s, FILE *stream);
+
+const int YES = 1;
 /*
  * this hashtable stores the dictionary.
  */
@@ -38,8 +43,10 @@ HashTable *dictionary;
  * to standard error (stderr) and it will be ignored in the grading
  * process, in the same way which this does.
  */
-int main(int argc, char **argv) {
-  if (argc != 2) {
+int main(int argc, char **argv)
+{
+  if (argc != 2)
+  {
     fprintf(stderr, "Specify a dictionary\n");
     return 0;
   }
@@ -48,7 +55,6 @@ int main(int argc, char **argv) {
    */
   fprintf(stderr, "Creating hashtable\n");
   dictionary = createHashTable(2255, &stringHash, &stringEquals);
-
   fprintf(stderr, "Loading dictionary %s\n", argv[1]);
   readDictionary(argv[1]);
   fprintf(stderr, "Dictionary loaded\n");
@@ -67,10 +73,17 @@ int main(int argc, char **argv) {
  * to a char * (null terminated string) which is done for you here for
  * convenience.
  */
-unsigned int stringHash(void *s) {
+unsigned int stringHash(void *s)
+{
   char *string = (char *)s;
-  fprintf(stderr, "Need to define stringHash\n");
-  exit(0);
+  unsigned int seed = 131; // ASCII has only 128 characters
+  unsigned int hash = 0;
+  while (*string)
+  {
+    hash = hash * seed + (*string++);
+  }
+
+  return hash;
 }
 
 /*
@@ -78,11 +91,11 @@ unsigned int stringHash(void *s) {
  * value if the two strings are identical (case sensitive comparison)
  * and 0 otherwise.
  */
-int stringEquals(void *s1, void *s2) {
+int stringEquals(void *s1, void *s2)
+{
   char *string1 = (char *)s1;
   char *string2 = (char *)s2;
-  fprintf(stderr, "Need to define stringEquals\n");
-  exit(0);
+  return strcmp(string1, string2) == 0;
 }
 
 /*
@@ -101,9 +114,58 @@ int stringEquals(void *s1, void *s2) {
  * you can safely use fscanf() to read in the strings until you want to handle
  * arbitrarily long dictionary chacaters.
  */
-void readDictionary(char *filename) {
-  fprintf(stderr, "Need to define readDictionary\n");
-  exit(0);
+void readDictionary(char *filename)
+{
+  FILE *file;
+  if (!(file = fopen(filename, "r")))
+  {
+    fprintf(stderr, "can't open file '%s'\n", filename);
+    exit(0);
+  }
+  char ch;
+  String *str = newString(-1);
+  while ((ch = (char)fgetc(file)) != EOF)
+  {
+    switch (ch)
+    {
+    case '\r':
+      break;
+    case '\n':
+      insertData(dictionary, (void *)stringIntoBuf(str), (void *)&YES);
+      str = newString(-1);
+      break;
+    default:
+      stringPush(str, ch);
+      break;
+    }
+  }
+  if (str->len)
+  {
+    insertData(dictionary, (void *)stringIntoBuf(str), (void *)&YES);
+  }
+  else
+  {
+    stringDrop(str);
+  }
+}
+
+size_t readLineToString(String *s, FILE *stream)
+{
+  size_t n = 0;
+  int ch;
+  while ((ch = (char)fgetc(stream)) != EOF)
+  {
+    switch (ch)
+    {
+    case '\r':;
+    case '\n':
+      break;
+    default:
+      stringPush(s, ch);
+      n++;
+    }
+  }
+  return n;
 }
 
 /*
@@ -129,7 +191,10 @@ void readDictionary(char *filename) {
  * numbers, punctuation) which are longer than 60 characters. For the final 20%
  * of your grade, you can no longer assume words have a bounded length.
  */
-void processInput() {
-  fprintf(stderr, "Need to define processInput\n");
-  exit(0);
+void processInput()
+{
+  if (findData(dictionary, (void *)&"Caps"))
+  {
+    printf("found!\n");
+  }
 }
