@@ -30,8 +30,7 @@
  */
 #include <string.h>
 
-size_t readLineToString(String *s, FILE *stream);
-
+void _check_spell(String *str);
 const int YES = 1;
 /*
  * this hashtable stores the dictionary.
@@ -45,27 +44,27 @@ HashTable *dictionary;
  */
 int main(int argc, char **argv)
 {
-  if (argc != 2)
-  {
-    fprintf(stderr, "Specify a dictionary\n");
-    return 0;
-  }
-  /*
+    if (argc != 2)
+    {
+        fprintf(stderr, "Specify a dictionary\n");
+        return 0;
+    }
+    /*
    * Allocate a hash table to store the dictionary
    */
-  fprintf(stderr, "Creating hashtable\n");
-  dictionary = createHashTable(2255, &stringHash, &stringEquals);
-  fprintf(stderr, "Loading dictionary %s\n", argv[1]);
-  readDictionary(argv[1]);
-  fprintf(stderr, "Dictionary loaded\n");
+    fprintf(stderr, "Creating hashtable\n");
+    dictionary = createHashTable(2255, &stringHash, &stringEquals);
+    fprintf(stderr, "Loading dictionary %s\n", argv[1]);
+    readDictionary(argv[1]);
+    fprintf(stderr, "Dictionary loaded\n");
 
-  fprintf(stderr, "Processing stdin\n");
-  processInput();
+    fprintf(stderr, "Processing stdin\n");
+    processInput();
 
-  /* main in C should always return 0 as a way of telling
+    /* main in C should always return 0 as a way of telling
      whatever program invoked this that everything went OK
      */
-  return 0;
+    return 0;
 }
 
 /*
@@ -75,15 +74,15 @@ int main(int argc, char **argv)
  */
 unsigned int stringHash(void *s)
 {
-  char *string = (char *)s;
-  unsigned int seed = 131; // ASCII has only 128 characters
-  unsigned int hash = 0;
-  while (*string)
-  {
-    hash = hash * seed + (*string++);
-  }
+    char *string = (char *)s;
+    unsigned int seed = 131; // ASCII has only 128 characters
+    unsigned int hash = 0;
+    while (*string)
+    {
+        hash = hash * seed + (*string++);
+    }
 
-  return hash;
+    return hash;
 }
 
 /*
@@ -93,9 +92,9 @@ unsigned int stringHash(void *s)
  */
 int stringEquals(void *s1, void *s2)
 {
-  char *string1 = (char *)s1;
-  char *string2 = (char *)s2;
-  return strcmp(string1, string2) == 0;
+    char *string1 = (char *)s1;
+    char *string2 = (char *)s2;
+    return strcmp(string1, string2) == 0;
 }
 
 /*
@@ -116,56 +115,37 @@ int stringEquals(void *s1, void *s2)
  */
 void readDictionary(char *filename)
 {
-  FILE *file;
-  if (!(file = fopen(filename, "r")))
-  {
-    fprintf(stderr, "can't open file '%s'\n", filename);
-    exit(0);
-  }
-  char ch;
-  String *str = newString(-1);
-  while ((ch = (char)fgetc(file)) != EOF)
-  {
-    switch (ch)
+    FILE *file;
+    if (!(file = fopen(filename, "r")))
     {
-    case '\r':
-      break;
-    case '\n':
-      insertData(dictionary, (void *)stringIntoBuf(str), (void *)&YES);
-      str = newString(-1);
-      break;
-    default:
-      stringPush(str, ch);
-      break;
+        fprintf(stderr, "can't open file '%s'\n", filename);
+        exit(0);
     }
-  }
-  if (str->len)
-  {
-    insertData(dictionary, (void *)stringIntoBuf(str), (void *)&YES);
-  }
-  else
-  {
-    stringDrop(str);
-  }
-}
-
-size_t readLineToString(String *s, FILE *stream)
-{
-  size_t n = 0;
-  int ch;
-  while ((ch = (char)fgetc(stream)) != EOF)
-  {
-    switch (ch)
+    char ch;
+    String *str = newString(-1);
+    while ((ch = (char)fgetc(file)) != EOF)
     {
-    case '\r':;
-    case '\n':
-      break;
-    default:
-      stringPush(s, ch);
-      n++;
+        switch (ch)
+        {
+        case '\r':
+            break;
+        case '\n':
+            insertData(dictionary, (void *)stringIntoBuf(str), (void *)&YES);
+            str = newString(-1);
+            break;
+        default:
+            stringPush(str, ch);
+            break;
+        }
     }
-  }
-  return n;
+    if (str->len)
+    {
+        insertData(dictionary, (void *)stringIntoBuf(str), (void *)&YES);
+    }
+    else
+    {
+        stringDrop(str);
+    }
 }
 
 /*
@@ -193,8 +173,60 @@ size_t readLineToString(String *s, FILE *stream)
  */
 void processInput()
 {
-  if (findData(dictionary, (void *)&"Caps"))
-  {
-    printf("found!\n");
-  }
+    char ch;
+    String *str = newString(-1);
+    while ((ch = (char)fgetc(stdin)) != EOF)
+    {
+        if (isalpha(ch))
+        {
+            stringPush(str, ch);
+        }
+        else
+        {
+            if (str->len)
+            {
+                _check_spell(str);
+                str = newString(-1);
+            }
+            fputc(ch, stdout);
+        }
+    }
+    if (str->len)
+    {
+        _check_spell(str);
+    }
+    else
+    {
+        stringDrop(str);
+    }
+}
+
+// check `str` in dictionary and free str.
+void _check_spell(String *str)
+{
+    char *buf = stringIntoBuf(str);
+    printf("%s", buf);
+    if (findData(dictionary, (void *)buf))
+    {
+        free(buf);
+        return;
+    }
+    char *s = buf + 1;
+    while (*s++)
+    {
+        *s = tolower(*s);
+    }
+    if (findData(dictionary, (void *)buf))
+    {
+        free(buf);
+        return;
+    }
+    *buf = tolower(*buf);
+    if (findData(dictionary, (void *)buf))
+    {
+        free(buf);
+        return;
+    }
+    free(buf);
+    printf(" [sic]");
 }

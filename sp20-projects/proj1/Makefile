@@ -25,6 +25,6 @@ test : clean philspel
 	touch testOutput
 	cat sampleInput | ./philspel sampleDictionary >	 testOutput
 	@echo The following should be empty if there are no problems
-	# diff sampleOutput testOutput 2> /dev/null
+	diff sampleOutput testOutput 2> /dev/null
 	@echo Testing complete
 
