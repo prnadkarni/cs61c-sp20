@@ -1,4 +1,5 @@
 .import ../matmul.s
+.import ../dot.s
 .import ../utils.s
 
 # static values for testing
