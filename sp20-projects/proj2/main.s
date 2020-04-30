@@ -31,7 +31,6 @@ main:
 
     mv s0, a1
     addi sp, sp, -24
-    
 
     # =====================================
     # LOAD MATRICES
@@ -68,11 +67,11 @@ main:
     # 2. NONLINEAR LAYER: ReLU(m0 * input)
     # 3. LINEAR LAYER:    m1 * ReLU(m0 * input)
 
-  
+    # m0 * input
     lw t0, 0(sp)    # m0's row
     lw t1, 20(sp)   # input's col
-    mul s4, t0, t1  # hidden layer's size
-    mv a0, s4
+    mul s4, t0, t1
+    slli a0, s4, 2  # hidden layer's size
     jal ra, malloc
     beq a0, zero, mem_alloc_error
     mv s5, a0
@@ -88,28 +87,43 @@ main:
     mv a6, s5       # d in the heap
     jal ra, matmul
 
-    li a1 'a'
-    jal print_char
-
-
+    # relu
     mv a0, s5
     mv a1, s4
     jal ra, relu
 
-    mv a0, s5
-    lw a1, 0(sp)
-    lw a2, 20(sp)
-    jal ra, print_int_array
 
+    # m1 * hidden
+    lw t0, 8(sp)    # m1's row
+    lw t1, 20(sp)   # input's col
+    mul s4, t0, t1
+    slli a0, s4, 2  # output's size
+    jal ra, malloc
+    beq a0, zero, mem_alloc_error
+    mv s6, a0
+
+    mv a0, s2       # m1
+    lw a1, 8(sp)    # m1's row
+    lw a2, 12(sp)   # m1's col
+
+    mv a3, s5       # hidden
+    lw a4, 0(sp)    # m0's row
+    lw a5, 20(sp)   # input's col
+
+    mv a6, s6       # output in the heap
+    jal ra, matmul
 
 
     # =====================================
     # WRITE OUTPUT
     # =====================================
     # Write output matrix
-    lw a0 16(s0) # Load pointer to output filename
 
-
+    lw a0, 16(s0)   # Load pointer to output filename
+    mv a1, s6
+    lw a2, 8(sp)
+    lw a3, 20(sp)
+    jal ra, write_matrix
 
 
 
@@ -118,21 +132,32 @@ main:
     # =====================================
     # Call argmax
 
-
+    mv a0, s6
+    mv a1, s4
+    jal ra, argmax
 
 
     # Print classification
-    
-
+    mv a1 a0
+    jal print_int
 
 
     # Print newline afterwards for clarity
     li a1 '\n'
     jal print_char
 
+    mv a0, s1
+    jal free
+    mv a0, s2
+    jal free
+    mv a0, s3
+    jal free
+    mv a0, s5
+    jal free
+    mv a0, s6
+    jal free
 
-
-
+    addi sp, sp, 24
     jal exit
 
 

@@ -73,8 +73,6 @@ inner_loop_start:
     slli t0, t0, 2
     add t0, t0, s5
     sw a0, 0(t0)     # d[idx] = dot(row, col)
-    li a1 'a'
-    jal print_char
     addi s7, s7, 1   # j += 1
     j inner_loop_start
 
@@ -103,7 +101,7 @@ outer_loop_end:
     lw, s6, 24(sp) # i
     lw, s7, 28(sp) # j
     lw, ra, 32(sp)
-    addi sp, sp, 32
+    addi sp, sp, 36
     ret
 
 
