@@ -52,7 +52,7 @@ map:
 
     # Call the function in question on that value. DO NOT use a label (be prepared to answer why).
     # What function? Recall the parameters of "map"
-    jalr ra, s1
+    jalr s1
 
     # store the returned value back into the node
     # Where can you assume the returned value is?
