@@ -70,6 +70,7 @@ def run_tests(tests):
   tests_failed = 0
 
   for description,filename,test in tests:
+    print("%s" % description)
     test_passed, reason = test(filename)
     if test_passed:
       print("\tPASSED test: %s" % description)
@@ -81,14 +82,14 @@ def run_tests(tests):
   print("Passed %d/%d tests" % (tests_passed, (tests_passed + tests_failed)))
 
 tests = [
-  ("Exercise 1 (Sub-Circuits) test", "student_output/ex1_test.out",TestCase(os.path.join(file_locations,'circ_files/ex1_test.circ'), os.path.join
-(file_locations,'reference_output/ex1_test.out'), "")),
-  ("Exercise 2 (Add Machine) test", "student_output/ex2_test.out",TestCase(os.path.join(file_locations,'circ_files/ex2_test.circ'), os.path.join
-(file_locations,'reference_output/ex2_test.out'), "")),
-  ("Exercise 3 (FSM) test", "student_output/ex3_test.out",TestCase(os.path.join(file_locations,'circ_files/ex3_test.circ'), os.path.join
-(file_locations,'reference_output/ex3_test.out'), "")),
-  ("Exercise 4 (Split) test", "student_output/ex4_test.out",TestCase(os.path.join(file_locations,'circ_files/ex4_test.circ'), os.path.join
-(file_locations,'reference_output/ex4_test.out'), "")),
+#   ("Exercise 1 (Sub-Circuits) test", "student_output/ex1_test.out",TestCase(os.path.join(file_locations,'circ_files/ex1_test.circ'), os.path.join
+# (file_locations,'reference_output/ex1_test.out'), "")),
+#   ("Exercise 2 (Add Machine) test", "student_output/ex2_test.out",TestCase(os.path.join(file_locations,'circ_files/ex2_test.circ'), os.path.join
+# (file_locations,'reference_output/ex2_test.out'), "")),
+#   ("Exercise 3 (FSM) test", "student_output/ex3_test.out",TestCase(os.path.join(file_locations,'circ_files/ex3_test.circ'), os.path.join
+# (file_locations,'reference_output/ex3_test.out'), "")),
+#   ("Exercise 4 (Split) test", "student_output/ex4_test.out",TestCase(os.path.join(file_locations,'circ_files/ex4_test.circ'), os.path.join
+# (file_locations,'reference_output/ex4_test.out'), "")),
   ("Exercise 5 (Rotate Right) test", "student_output/ex5_test.out",TestCase(os.path.join(file_locations,'circ_files/ex5_test.circ'), os.path.join
 (file_locations,'reference_output/ex5_test.out'), "")),
 ]
