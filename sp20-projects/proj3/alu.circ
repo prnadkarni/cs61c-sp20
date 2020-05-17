@@ -134,8 +134,8 @@ This file is intended to be loaded by Logisim-evolution (https://github.com/reds
       <text fill="#404040" font-family="Dialog" font-size="12" text-anchor="start" x="46" y="175">B</text>
       <text fill="#404040" font-family="Dialog" font-size="12" text-anchor="start" x="70" y="165">ALUSel</text>
       <text fill="#404040" font-family="Dialog" font-size="12" text-anchor="end" x="114" y="114">Result</text>
-      <circ-port height="8" pin="200,310" width="8" x="86" y="176"/>
       <circ-port height="10" pin="1180,240" width="10" x="115" y="105"/>
+      <circ-port height="8" pin="200,310" width="8" x="86" y="176"/>
       <circ-port height="8" pin="200,160" width="8" x="36" y="56"/>
       <circ-port height="8" pin="200,250" width="8" x="36" y="166"/>
       <polygon fill="none" points="40,20 120,70 120,160 40,210 40,130 60,115 40,100" stroke="#000000" stroke-width="2"/>
@@ -150,15 +150,18 @@ This file is intended to be loaded by Logisim-evolution (https://github.com/reds
     <wire from="(450,400)" to="(510,400)"/>
     <wire from="(450,480)" to="(510,480)"/>
     <wire from="(450,600)" to="(510,600)"/>
+    <wire from="(450,680)" to="(510,680)"/>
     <wire from="(900,410)" to="(960,410)"/>
     <wire from="(450,530)" to="(450,540)"/>
     <wire from="(450,930)" to="(450,940)"/>
+    <wire from="(450,650)" to="(450,660)"/>
     <wire from="(660,1060)" to="(660,1090)"/>
     <wire from="(750,1070)" to="(750,1100)"/>
     <wire from="(900,330)" to="(900,410)"/>
     <wire from="(940,370)" to="(960,370)"/>
     <wire from="(550,740)" to="(570,740)"/>
     <wire from="(550,820)" to="(570,820)"/>
+    <wire from="(610,680)" to="(630,680)"/>
     <wire from="(1160,160)" to="(1360,160)"/>
     <wire from="(910,300)" to="(910,400)"/>
     <wire from="(220,100)" to="(220,140)"/>
@@ -172,7 +175,6 @@ This file is intended to be loaded by Logisim-evolution (https://github.com/reds
     <wire from="(220,180)" to="(220,230)"/>
     <wire from="(440,760)" to="(450,760)"/>
     <wire from="(90,100)" to="(90,340)"/>
-    <wire from="(460,660)" to="(470,660)"/>
     <wire from="(440,720)" to="(450,720)"/>
     <wire from="(440,800)" to="(450,800)"/>
     <wire from="(440,840)" to="(450,840)"/>
@@ -207,6 +209,8 @@ This file is intended to be loaded by Logisim-evolution (https://github.com/reds
     <wire from="(940,210)" to="(940,370)"/>
     <wire from="(200,160)" to="(220,160)"/>
     <wire from="(440,530)" to="(450,530)"/>
+    <wire from="(440,650)" to="(450,650)"/>
+    <wire from="(440,690)" to="(450,690)"/>
     <wire from="(1160,240)" to="(1180,240)"/>
     <wire from="(880,430)" to="(960,430)"/>
     <wire from="(310,560)" to="(370,560)"/>
@@ -217,6 +221,7 @@ This file is intended to be loaded by Logisim-evolution (https://github.com/reds
     <wire from="(450,340)" to="(510,340)"/>
     <wire from="(450,420)" to="(510,420)"/>
     <wire from="(450,540)" to="(510,540)"/>
+    <wire from="(450,660)" to="(510,660)"/>
     <wire from="(840,330)" to="(900,330)"/>
     <wire from="(450,150)" to="(450,160)"/>
     <wire from="(450,230)" to="(450,240)"/>
@@ -231,8 +236,8 @@ This file is intended to be loaded by Logisim-evolution (https://github.com/reds
     <wire from="(840,390)" to="(880,390)"/>
     <wire from="(920,390)" to="(960,390)"/>
     <wire from="(1160,260)" to="(1160,310)"/>
-    <wire from="(550,680)" to="(570,680)"/>
     <wire from="(550,920)" to="(570,920)"/>
+    <wire from="(550,680)" to="(570,680)"/>
     <wire from="(890,470)" to="(890,510)"/>
     <wire from="(440,1000)" to="(470,1000)"/>
     <wire from="(440,1080)" to="(470,1080)"/>
@@ -249,7 +254,6 @@ This file is intended to be loaded by Logisim-evolution (https://github.com/reds
     <wire from="(890,420)" to="(960,420)"/>
     <wire from="(840,570)" to="(910,570)"/>
     <wire from="(840,600)" to="(920,600)"/>
-    <wire from="(440,690)" to="(510,690)"/>
     <wire from="(840,510)" to="(890,510)"/>
     <wire from="(450,830)" to="(510,830)"/>
     <wire from="(450,750)" to="(510,750)"/>
@@ -258,9 +262,9 @@ This file is intended to be loaded by Logisim-evolution (https://github.com/reds
     <wire from="(220,330)" to="(220,340)"/>
     <wire from="(900,480)" to="(960,480)"/>
     <wire from="(840,540)" to="(900,540)"/>
-    <wire from="(470,660)" to="(470,670)"/>
     <wire from="(450,720)" to="(450,730)"/>
     <wire from="(450,800)" to="(450,810)"/>
+    <wire from="(450,680)" to="(450,690)"/>
     <wire from="(660,1010)" to="(660,1040)"/>
     <wire from="(820,1060)" to="(860,1060)"/>
     <wire from="(530,840)" to="(530,870)"/>
@@ -268,7 +272,6 @@ This file is intended to be loaded by Logisim-evolution (https://github.com/reds
     <wire from="(870,460)" to="(870,480)"/>
     <wire from="(410,560)" to="(510,560)"/>
     <wire from="(910,490)" to="(910,570)"/>
-    <wire from="(470,670)" to="(510,670)"/>
     <wire from="(550,170)" to="(570,170)"/>
     <wire from="(550,410)" to="(570,410)"/>
     <wire from="(550,490)" to="(570,490)"/>
@@ -587,25 +590,6 @@ This file is intended to be loaded by Logisim-evolution (https://github.com/reds
       <a name="label" val="mulhu0"/>
       <a name="labelfont" val="Consolas bold 16"/>
     </comp>
-    <comp lib="3" loc="(550,680)" name="Shifter">
-      <a name="width" val="32"/>
-      <a name="shift" val="lr"/>
-    </comp>
-    <comp lib="0" loc="(440,690)" name="Constant">
-      <a name="width" val="5"/>
-      <a name="value" val="0x1f"/>
-    </comp>
-    <comp lib="0" loc="(460,660)" name="Tunnel">
-      <a name="facing" val="east"/>
-      <a name="width" val="32"/>
-      <a name="label" val="sub0"/>
-      <a name="labelfont" val="Consolas bold 16"/>
-    </comp>
-    <comp lib="0" loc="(570,680)" name="Tunnel">
-      <a name="width" val="32"/>
-      <a name="label" val="slt0"/>
-      <a name="labelfont" val="Consolas bold 16"/>
-    </comp>
     <comp lib="0" loc="(440,760)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="width" val="32"/>
@@ -792,6 +776,29 @@ This file is intended to be loaded by Logisim-evolution (https://github.com/reds
       <a name="width" val="32"/>
       <a name="label" val="mulh0"/>
       <a name="labelfont" val="Consolas bold 16"/>
+    </comp>
+    <comp lib="3" loc="(550,670)" name="Comparator">
+      <a name="width" val="32"/>
+    </comp>
+    <comp lib="0" loc="(630,680)" name="Tunnel">
+      <a name="width" val="32"/>
+      <a name="label" val="slt0"/>
+      <a name="labelfont" val="Consolas bold 16"/>
+    </comp>
+    <comp lib="0" loc="(610,680)" name="Bit Extender">
+      <a name="in_width" val="1"/>
+      <a name="out_width" val="32"/>
+      <a name="type" val="zero"/>
+    </comp>
+    <comp lib="0" loc="(440,650)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="width" val="32"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(440,690)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="width" val="32"/>
+      <a name="label" val="B"/>
     </comp>
   </circuit>
 </project>
