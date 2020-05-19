@@ -1,2 +1,6 @@
 .DS_Store
 ._*
+
+# my-tests
+cpu-my-*.circ
+cpu-my-*.out
