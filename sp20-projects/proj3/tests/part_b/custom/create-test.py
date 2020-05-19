@@ -137,5 +137,7 @@ if __name__ == "__main__":
   parser.add_argument("tests", nargs="+", help="Paths to RISC-V assembly files (ending in \".s\") you want to create tests for")
   parser.add_argument("-n", type=int, default=-1, help="How many cycles you want to simulate the CPU for (default is the number of cycles Venus takes to run your code)")
   args = parser.parse_args()
-
+  if len(args.tests) == 1 and os.path.isdir(args.tests[0]):
+    dir_name = args.tests[0]
+    args.tests = [os.path.join(dir_name, f) for f in os.listdir(dir_name) if f.endswith('.s')]
   main(args.tests, args.n)
